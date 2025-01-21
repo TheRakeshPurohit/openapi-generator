@@ -22,8 +22,21 @@ import org.openapitools.client.model.Order;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+
 import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.http.HttpRequest;
+import java.nio.channels.Channels;
+import java.nio.channels.Pipe;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -37,7 +50,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@javax.annotation.processing.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0-SNAPSHOT")
 public class StoreApi {
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
@@ -104,15 +117,15 @@ public class StoreApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("deleteOrder", localVarResponse);
         }
-        return new ApiResponse<Void>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          null
+        return new ApiResponse<>(
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            null
         );
       } finally {
         // Drain the InputStream
         while (localVarResponse.body().read() != -1) {
-            // Ignore
+          // Ignore
         }
         localVarResponse.body().close();
       }
@@ -149,6 +162,7 @@ public class StoreApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Returns pet inventories by status
    * Returns a map of status codes to quantities
@@ -179,10 +193,21 @@ public class StoreApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("getInventory", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<Map<String, Integer>>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<Map<String, Integer>>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<Map<String, Integer>>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Map<String, Integer>>() {})
         );
       } finally {
       }
@@ -214,6 +239,7 @@ public class StoreApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Find purchase order by ID
    * For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generate exceptions
@@ -246,10 +272,21 @@ public class StoreApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("getOrderById", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<Order>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<Order>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<Order>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Order>() {})
         );
       } finally {
       }
@@ -286,6 +323,7 @@ public class StoreApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Place an order for a pet
    * 
@@ -318,10 +356,21 @@ public class StoreApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("placeOrder", localVarResponse);
         }
+        if (localVarResponse.body() == null) {
+          return new ApiResponse<Order>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        String responseBody = new String(localVarResponse.body().readAllBytes());
+        localVarResponse.body().close();
+
         return new ApiResponse<Order>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<Order>() {}) // closes the InputStream
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Order>() {})
         );
       } finally {
       }
@@ -363,4 +412,5 @@ public class StoreApi {
     }
     return localVarRequestBuilder;
   }
+
 }

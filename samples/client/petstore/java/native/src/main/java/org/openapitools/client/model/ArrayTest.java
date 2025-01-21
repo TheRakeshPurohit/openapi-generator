@@ -13,8 +13,12 @@
 
 package org.openapitools.client.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.StringJoiner;
 import java.util.Objects;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,11 +27,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.client.model.ReadOnlyFirst;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
+import org.openapitools.client.ApiClient;
 /**
  * ArrayTest
  */
@@ -36,21 +42,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ArrayTest.JSON_PROPERTY_ARRAY_ARRAY_OF_INTEGER,
   ArrayTest.JSON_PROPERTY_ARRAY_ARRAY_OF_MODEL
 })
-@javax.annotation.processing.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0-SNAPSHOT")
 public class ArrayTest {
   public static final String JSON_PROPERTY_ARRAY_OF_STRING = "array_of_string";
-  private List<String> arrayOfString = null;
+  @javax.annotation.Nullable
+  private List<String> arrayOfString = new ArrayList<>();
 
   public static final String JSON_PROPERTY_ARRAY_ARRAY_OF_INTEGER = "array_array_of_integer";
-  private List<List<Long>> arrayArrayOfInteger = null;
+  @javax.annotation.Nullable
+  private List<List<Long>> arrayArrayOfInteger = new ArrayList<>();
 
   public static final String JSON_PROPERTY_ARRAY_ARRAY_OF_MODEL = "array_array_of_model";
-  private List<List<ReadOnlyFirst>> arrayArrayOfModel = null;
+  @javax.annotation.Nullable
+  private List<List<ReadOnlyFirst>> arrayArrayOfModel = new ArrayList<>();
 
   public ArrayTest() { 
   }
 
-  public ArrayTest arrayOfString(List<String> arrayOfString) {
+  public ArrayTest arrayOfString(@javax.annotation.Nullable List<String> arrayOfString) {
     this.arrayOfString = arrayOfString;
     return this;
   }
@@ -63,14 +72,13 @@ public class ArrayTest {
     return this;
   }
 
-   /**
+  /**
    * Get arrayOfString
    * @return arrayOfString
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ARRAY_OF_STRING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<String> getArrayOfString() {
     return arrayOfString;
   }
@@ -78,12 +86,12 @@ public class ArrayTest {
 
   @JsonProperty(JSON_PROPERTY_ARRAY_OF_STRING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setArrayOfString(List<String> arrayOfString) {
+  public void setArrayOfString(@javax.annotation.Nullable List<String> arrayOfString) {
     this.arrayOfString = arrayOfString;
   }
 
 
-  public ArrayTest arrayArrayOfInteger(List<List<Long>> arrayArrayOfInteger) {
+  public ArrayTest arrayArrayOfInteger(@javax.annotation.Nullable List<List<Long>> arrayArrayOfInteger) {
     this.arrayArrayOfInteger = arrayArrayOfInteger;
     return this;
   }
@@ -96,14 +104,13 @@ public class ArrayTest {
     return this;
   }
 
-   /**
+  /**
    * Get arrayArrayOfInteger
    * @return arrayArrayOfInteger
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ARRAY_ARRAY_OF_INTEGER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<List<Long>> getArrayArrayOfInteger() {
     return arrayArrayOfInteger;
   }
@@ -111,12 +118,12 @@ public class ArrayTest {
 
   @JsonProperty(JSON_PROPERTY_ARRAY_ARRAY_OF_INTEGER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setArrayArrayOfInteger(List<List<Long>> arrayArrayOfInteger) {
+  public void setArrayArrayOfInteger(@javax.annotation.Nullable List<List<Long>> arrayArrayOfInteger) {
     this.arrayArrayOfInteger = arrayArrayOfInteger;
   }
 
 
-  public ArrayTest arrayArrayOfModel(List<List<ReadOnlyFirst>> arrayArrayOfModel) {
+  public ArrayTest arrayArrayOfModel(@javax.annotation.Nullable List<List<ReadOnlyFirst>> arrayArrayOfModel) {
     this.arrayArrayOfModel = arrayArrayOfModel;
     return this;
   }
@@ -129,14 +136,13 @@ public class ArrayTest {
     return this;
   }
 
-   /**
+  /**
    * Get arrayArrayOfModel
    * @return arrayArrayOfModel
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ARRAY_ARRAY_OF_MODEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<List<ReadOnlyFirst>> getArrayArrayOfModel() {
     return arrayArrayOfModel;
   }
@@ -144,7 +150,7 @@ public class ArrayTest {
 
   @JsonProperty(JSON_PROPERTY_ARRAY_ARRAY_OF_MODEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setArrayArrayOfModel(List<List<ReadOnlyFirst>> arrayArrayOfModel) {
+  public void setArrayArrayOfModel(@javax.annotation.Nullable List<List<ReadOnlyFirst>> arrayArrayOfModel) {
     this.arrayArrayOfModel = arrayArrayOfModel;
   }
 
@@ -154,21 +160,12 @@ public class ArrayTest {
    */
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    ArrayTest arrayTest = (ArrayTest) o;
-    return Objects.equals(this.arrayOfString, arrayTest.arrayOfString) &&
-        Objects.equals(this.arrayArrayOfInteger, arrayTest.arrayArrayOfInteger) &&
-        Objects.equals(this.arrayArrayOfModel, arrayTest.arrayArrayOfModel);
+    return EqualsBuilder.reflectionEquals(this, o, false, null, true);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(arrayOfString, arrayArrayOfInteger, arrayArrayOfModel);
+    return HashCodeBuilder.reflectionHashCode(this);
   }
 
   @Override
@@ -191,6 +188,133 @@ public class ArrayTest {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
+  }
+
+  /**
+   * Convert the instance into URL query string.
+   *
+   * @return URL query string
+   */
+  public String toUrlQueryString() {
+    return toUrlQueryString(null);
+  }
+
+  /**
+   * Convert the instance into URL query string.
+   *
+   * @param prefix prefix of the query string
+   * @return URL query string
+   */
+  public String toUrlQueryString(String prefix) {
+    String suffix = "";
+    String containerSuffix = "";
+    String containerPrefix = "";
+    if (prefix == null) {
+      // style=form, explode=true, e.g. /pet?name=cat&type=manx
+      prefix = "";
+    } else {
+      // deepObject style e.g. /pet?id[name]=cat&id[type]=manx
+      prefix = prefix + "[";
+      suffix = "]";
+      containerSuffix = "]";
+      containerPrefix = "[";
+    }
+
+    StringJoiner joiner = new StringJoiner("&");
+
+    // add `array_of_string` to the URL query string
+    if (getArrayOfString() != null) {
+      for (int i = 0; i < getArrayOfString().size(); i++) {
+        joiner.add(String.format("%sarray_of_string%s%s=%s", prefix, suffix,
+            "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix),
+            URLEncoder.encode(ApiClient.valueToString(getArrayOfString().get(i)), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      }
+    }
+
+    // add `array_array_of_integer` to the URL query string
+    if (getArrayArrayOfInteger() != null) {
+      for (int i = 0; i < getArrayArrayOfInteger().size(); i++) {
+        joiner.add(String.format("%sarray_array_of_integer%s%s=%s", prefix, suffix,
+            "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix),
+            URLEncoder.encode(ApiClient.valueToString(getArrayArrayOfInteger().get(i)), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      }
+    }
+
+    // add `array_array_of_model` to the URL query string
+    if (getArrayArrayOfModel() != null) {
+      for (int i = 0; i < getArrayArrayOfModel().size(); i++) {
+        if (getArrayArrayOfModel().get(i) != null) {
+          joiner.add(String.format("%sarray_array_of_model%s%s=%s", prefix, suffix,
+              "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix),
+              URLEncoder.encode(ApiClient.valueToString(getArrayArrayOfModel().get(i)), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+        }
+      }
+    }
+
+    return joiner.toString();
+  }
+
+    public static class Builder {
+
+    private ArrayTest instance;
+
+    public Builder() {
+      this(new ArrayTest());
+    }
+
+    protected Builder(ArrayTest instance) {
+      this.instance = instance;
+    }
+
+    public ArrayTest.Builder arrayOfString(List<String> arrayOfString) {
+      this.instance.arrayOfString = arrayOfString;
+      return this;
+    }
+    public ArrayTest.Builder arrayArrayOfInteger(List<List<Long>> arrayArrayOfInteger) {
+      this.instance.arrayArrayOfInteger = arrayArrayOfInteger;
+      return this;
+    }
+    public ArrayTest.Builder arrayArrayOfModel(List<List<ReadOnlyFirst>> arrayArrayOfModel) {
+      this.instance.arrayArrayOfModel = arrayArrayOfModel;
+      return this;
+    }
+
+
+    /**
+    * returns a built ArrayTest instance.
+    *
+    * The builder is not reusable.
+    */
+    public ArrayTest build() {
+      try {
+        return this.instance;
+      } finally {
+        // ensure that this.instance is not reused
+        this.instance = null;
+      }
+    }
+
+    @Override
+    public String toString() {
+      return getClass() + "=(" + instance + ")";
+    }
+  }
+
+  /**
+  * Create a builder with no initialized field.
+  */
+  public static ArrayTest.Builder builder() {
+    return new ArrayTest.Builder();
+  }
+
+  /**
+  * Create a builder with a shallow copy of this instance.
+  */
+  public ArrayTest.Builder toBuilder() {
+    return new ArrayTest.Builder()
+      .arrayOfString(getArrayOfString())
+      .arrayArrayOfInteger(getArrayArrayOfInteger())
+      .arrayArrayOfModel(getArrayArrayOfModel());
   }
 
 }

@@ -1,11 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
+	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	sw "go-petstore"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestBanana(t *testing.T) {
@@ -40,4 +43,41 @@ func TestDog(t *testing.T) {
 	breedString := "Shepherd"
 	//assert.Nil(newDog)
 	assert.Equal(*newDog.Breed, breedString, "Breed should be `Shepherd`")
+}
+
+func TestReadOnlyFirst(t *testing.T) {
+	assert := assert.New(t)
+
+	newReadOnlyFirst := (sw.ReadOnlyFirst{Bar: sw.PtrString("Bar value"), Baz: sw.PtrString("Baz value")})
+	json, _ := newReadOnlyFirst.MarshalJSON()
+	expected := `{"bar":"Bar value","baz":"Baz value"}`
+
+	assert.Equal(expected, (string)(json), "ReadOnlyFirst JSON is incorrect")
+}
+
+func TestRequiredFieldsAreValidated(t *testing.T) {
+	assert := assert.New(t)
+
+	newPet := (sw.Pet{})
+	jsonPet := `{"foo": "Foo value"}`
+	err := newPet.UnmarshalJSON([]byte(jsonPet))
+	expected := "no value given for required property"
+
+	assert.ErrorContains(err, expected, "Pet should return error when missing required fields")
+}
+
+func TestRequiredAnyOfMarshalling(t *testing.T) {
+	// Given
+	bodyBuf := &bytes.Buffer{}
+	bananaLengthCm := float32(23.4)
+	req := &sw.FruitJuice{Fruit: sw.GmFruit{
+		Banana: &sw.Banana{LengthCm: &bananaLengthCm},
+	}}
+
+	// When
+	err := json.NewEncoder(bodyBuf).Encode(req)
+
+	// Then
+	assert.Nil(t, err)
+	assert.Equal(t, strings.TrimSpace(bodyBuf.String()), "{\"fruit\":{\"lengthCm\":23.4}}")
 }

@@ -23,8 +23,21 @@ import org.openapitools.client.model.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+
 import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.http.HttpRequest;
+import java.nio.channels.Channels;
+import java.nio.channels.Pipe;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -40,7 +53,7 @@ import java.util.function.Consumer;
 
 import java.util.concurrent.CompletableFuture;
 
-@javax.annotation.processing.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0-SNAPSHOT")
 public class UserApi {
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
@@ -159,6 +172,7 @@ public class UserApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Creates list of users with given input array
    * 
@@ -242,6 +256,7 @@ public class UserApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Creates list of users with given input array
    * 
@@ -325,6 +340,7 @@ public class UserApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Delete user
    * This can only be done by the logged in user.
@@ -403,6 +419,7 @@ public class UserApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Get user by user name
    * 
@@ -496,6 +513,7 @@ public class UserApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Logs user into the system
    * 
@@ -582,12 +600,19 @@ public class UserApi {
     String localVarPath = "/user/login";
 
     List<Pair> localVarQueryParams = new ArrayList<>();
+    StringJoiner localVarQueryStringJoiner = new StringJoiner("&");
+    String localVarQueryParameterBaseName;
+    localVarQueryParameterBaseName = "username";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("username", username));
+    localVarQueryParameterBaseName = "password";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("password", password));
 
-    if (!localVarQueryParams.isEmpty()) {
+    if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
       StringJoiner queryJoiner = new StringJoiner("&");
       localVarQueryParams.forEach(p -> queryJoiner.add(p.getName() + '=' + p.getValue()));
+      if (localVarQueryStringJoiner.length() != 0) {
+        queryJoiner.add(localVarQueryStringJoiner.toString());
+      }
       localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath + '?' + queryJoiner.toString()));
     } else {
       localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
@@ -604,6 +629,7 @@ public class UserApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Logs out current logged in user session
    * 
@@ -675,6 +701,7 @@ public class UserApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Updated user
    * This can only be done by the logged in user.
@@ -765,4 +792,5 @@ public class UserApi {
     }
     return localVarRequestBuilder;
   }
+
 }

@@ -14,8 +14,9 @@
 package org.openapitools.client.api;
 
 import org.openapitools.client.ApiException;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.openapitools.client.model.StringEnumRef;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ import java.util.Set;
 /**
  * API tests for PathApi
  */
-@Ignore
+@Disabled
 public class PathApiTest {
 
     private final PathApi api = new PathApi();
@@ -42,11 +43,13 @@ public class PathApiTest {
      *          if the Api call fails
      */
     @Test
-    public void testsPathStringPathStringIntegerPathIntegerTest() throws ApiException {
+    public void testsPathStringPathStringIntegerPathIntegerEnumNonrefStringPathEnumRefStringPathTest() throws ApiException {
         String pathString = null;
         Integer pathInteger = null;
+        String enumNonrefStringPath = null;
+        StringEnumRef enumRefStringPath = null;
         String response = 
-        api.testsPathStringPathStringIntegerPathInteger(pathString, pathInteger);
+        api.testsPathStringPathStringIntegerPathIntegerEnumNonrefStringPathEnumRefStringPath(pathString, pathInteger, enumNonrefStringPath, enumRefStringPath);
         
         // TODO: test validations
     }
